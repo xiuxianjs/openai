@@ -34,9 +34,9 @@ export const tags = async (): Promise<ModelList> => {
   }).then(res => res.data)
 }
 
-export const messages = {
-  //
-}
+import { getIoRedis } from 'alemonjs'
+
+const ioredis = getIoRedis()
 
 type Message = {
   model: string
@@ -55,23 +55,32 @@ type Message = {
   eval_duration: number
 }
 
-export const chat = async (key: string, message: string): Promise<Message> => {
-  if (!messages[key]) {
-    messages[key] = []
-    messages[key].push({
-      role: 'system',
-      content: '新建对话'
-    })
+export const chat = async (
+  key: string,
+  userMessage: string
+): Promise<Message> => {
+  // Initialize the messages in Redis if they do not exist
+  const exists = await ioredis.exists(key)
+  if (!exists) {
+    await ioredis.rpush(
+      key,
+      JSON.stringify({ role: 'system', content: '新建对话' })
+    )
   }
-  messages[key].push({
-    role: 'user',
-    content: message
-  })
-  if (messages[key].length > 30) {
-    messages[key].shift()
-  }
+
+  // Append the user message to the Redis list
+  await ioredis.rpush(
+    key,
+    JSON.stringify({ role: 'user', content: userMessage })
+  )
+
+  // Retrieve the entire message list
+  const messages = await ioredis.lrange(key, 0, -1)
+  const parsedMessages = messages.map(msg => JSON.parse(msg))
+
   const model = AI.get('model') || 'gemma2:latest'
-  return await server({
+
+  const response = await server({
     method: 'post',
     url: '/api/chat',
     headers: {
@@ -79,8 +88,23 @@ export const chat = async (key: string, message: string): Promise<Message> => {
     },
     data: {
       model: model,
-      messages: messages[key],
+      messages: parsedMessages,
       stream: false
     }
-  }).then(res => res.data)
+  })
+
+  const res = response.data
+
+  // Store the assistant's response in messages
+  const assistantMessage = res.message
+  if (assistantMessage?.content) {
+    await ioredis.rpush(key, JSON.stringify(assistantMessage))
+  }
+
+  return res
+}
+
+// 清理聊天记录的函数
+export const clearChat = async (key: string): Promise<void> => {
+  await ioredis.del(key)
 }

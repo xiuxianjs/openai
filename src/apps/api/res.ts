@@ -1,9 +1,8 @@
 import { createEventName } from '@src/apps/util'
 import { Text, useSend } from 'alemonjs'
-import { chat, messages } from '../server'
+import { chat } from '../server'
 export const name = createEventName(import.meta.url)
 export const regular = /^(#|\/)ai/
-
 export default OnResponse(
   async event => {
     const msg = event.MessageText.replace(regular, '').trim()
@@ -16,7 +15,6 @@ export default OnResponse(
       try {
         const res = await chat(key, msg)
         if (res.message?.content) {
-          messages[key].push(res.message)
           Send(Text(res.message.content))
         } else {
           Send(Text('我不知道你在说什么'))

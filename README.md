@@ -14,6 +14,13 @@ ollama:
   baseURL: ''
   # 默认
   timeout: 60000
+
+# 需安装redis进行对话存储
+redis:
+  host: ''
+  port: ''
+  password: ''
+  db: ''
 ```
 
 ### 立即启动
