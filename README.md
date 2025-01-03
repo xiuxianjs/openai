@@ -6,10 +6,6 @@
 
 ## 使用指南
 
-```sh
-git clone
-```
-
 `alemon.config.yaml`
 
 ```yaml
@@ -18,6 +14,34 @@ ollama:
   baseURL: ''
   # 默认
   timeout: 60000
+```
+
+### 立即启动
+
+```sh
+git clone --depth=1 https://github.com/lemonade-lab/ollama.git
+cd ollama
+```
+
+```sh
+npm install yarn@1.19.1 -g --registry=https://registry.npmmirror.com
+yarn install
+```
+
+```sh
+yarn dev
+```
+
+### 模块化
+
+> 请确保配置有packages空间，详情请阅读开发文档
+
+```sh
+git clone --depth=1 https://github.com/lemonade-lab/ollama.git ./packages/ollama
+```
+
+```sh
+npx lerna run build
 ```
 
 ## 交流
