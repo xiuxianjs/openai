@@ -30,6 +30,7 @@ https://ollama.com/
 
 ```yaml
 baseURL: 'http://localhost:11434/v1/'
+apiKey: ''
 model: 'llama3.2'
 ```
 
@@ -70,7 +71,34 @@ services:
 docker-compose up -d
 ```
 
-### 立即启动
+### 使用
+
+> 请确保已安装alemonjs机器人
+
+```sh
+yarn add alemonjs-openai -W
+```
+
+```yaml
+apps:
+  - 'alemonjs-openai'
+```
+
+### 本地
+
+- 包空间
+
+> 请确保配置有packages空间，详情请阅读开发文档
+
+```sh
+git clone --depth=1 https://github.com/xiuxianjs/openai.git ./packages/openai
+```
+
+```sh
+npx lerna run build
+```
+
+- 从新开始
 
 ```sh
 git clone --depth=1 https://github.com/xiuxianjs/openai.git
@@ -88,27 +116,4 @@ yarn add @alemonjs/db
 
 ```sh
 yarn dev
-```
-
-### 模块化
-
-> 请确保配置有packages空间，详情请阅读开发文档
-
-```sh
-git clone --depth=1 https://github.com/xiuxianjs/openai.git ./packages/openai
-```
-
-```sh
-npx lerna run build
-```
-
-### 扩展
-
-```sh
-yarn add alemonjs-openai -W
-```
-
-```yaml
-apps:
-  - 'alemonjs-openai'
 ```
