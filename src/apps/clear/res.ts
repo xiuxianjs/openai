@@ -2,7 +2,7 @@ import { createEventName } from '@src/apps/util'
 import { Text, useSend } from 'alemonjs'
 import { clearChat } from '../server'
 export const name = createEventName(import.meta.url)
-export const regular = /^(#|\/)clear/
+export const regular = /^(#|\/)ai-clear/
 export default OnResponse(
   async event => {
     const Send = useSend(event)

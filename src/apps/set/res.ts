@@ -2,7 +2,7 @@ import { createEventName } from '@src/apps/util'
 import { getConfig, Text, useSend } from 'alemonjs'
 import { clear } from '../server'
 export const name = createEventName(import.meta.url)
-export const regular = /^(#|\/)set/
+export const regular = /^(#|\/)ai-set/
 export default OnResponse(
   async event => {
     const Send = useSend(event)

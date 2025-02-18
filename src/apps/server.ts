@@ -58,7 +58,7 @@ export const chat = async (key: string, userMessage: string) => {
     model: value?.openai?.model
   })
 
-  console.log('completion', completion)
+  // console.log('completion', completion)
 
   // 将助手消息附加到REDIS列表中
   const assistantMessage = completion.choices[0].message

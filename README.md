@@ -76,7 +76,7 @@ docker-compose up -d
 > 请确保已安装alemonjs机器人
 
 ```sh
-yarn add alemonjs-openai -W
+yarn add alemonjs-openai @alemonjs/db -W
 ```
 
 ```yaml
@@ -108,10 +108,7 @@ cd openai
 ```sh
 npm install yarn@1.19.1 -g --registry=https://registry.npmmirror.com
 yarn install
-```
-
-```sh
-yarn add @alemonjs/db
+yarn add @alemonjs/db -W
 ```
 
 ```sh
