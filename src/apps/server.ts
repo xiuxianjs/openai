@@ -6,6 +6,10 @@ const ioredis = getIoRedis()
 
 let openai: OpenAI | null = null
 
+export const clear = () => {
+  openai = null
+}
+
 // 获取openai实例
 const getOpenAI = (): OpenAI => {
   if (!openai) {
@@ -16,7 +20,7 @@ const getOpenAI = (): OpenAI => {
     }
     openai = new OpenAI({
       baseURL: openaiConfig.baseURL,
-      apiKey: openaiConfig?.apiKey
+      apiKey: openaiConfig.apiKey ?? ''
     })
   }
   return openai
