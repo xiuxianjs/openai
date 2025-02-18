@@ -14,12 +14,18 @@ export default OnResponse(
       const Send = useSend(event)
       try {
         const res = await chat(key, msg)
-        if (res.message?.content) {
-          Send(Text(res.message.content))
+        if (res.content) {
+          Send(Text(res.content))
         } else {
           Send(Text('我不知道你在说什么'))
         }
       } catch (e) {
+        // 得到错误信息
+        if (e.message) {
+          console.error(e.message)
+          Send(Text(e.message))
+          return
+        }
         console.error(e)
         Send(Text('出错啦'))
       }

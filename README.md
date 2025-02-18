@@ -1,38 +1,89 @@
-# Ollama AI
+# openai
 
-开发文档 https://lvyjs.dev/
+支持连接符合openai接口的模型
 
-开发文档 [https://alemonjs.com/](https://alemonjs.com/)
+- openai
 
-## 使用指南
+https://platform.openai.com/docs/overview
+
+```yaml
+apiKey: ''
+model: 'gpt-4o'
+```
+
+- deepseek
+
+https://api-docs.deepseek.com
+
+```yaml
+baseURL: 'https://api.deepseek.com'
+apiKey: ''
+model: 'deepseek-chat'
+# 可选 deepseek-reasoner (R1)
+```
+
+- ollama
+
+> 可本地部署的开源模型
+
+https://ollama.com/
+
+```yaml
+baseURL: 'http://localhost:11434/v1/'
+model: 'llama3.2'
+```
+
+- 唤醒
+
+`/help`
+
+## 环境
 
 `alemon.config.yaml`
 
 ```yaml
-ollama:
-  # 地址
+openai:
   baseURL: ''
-  # 默认
-  timeout: 60000
-
+  apiKey: ''
+  model: ''
 # 需安装redis进行对话存储
 redis:
-  host: ''
-  port: ''
+  host: '127.0.0.1'
+  port: '6379'
   password: ''
-  db: ''
+  db: '1'
+```
+
+- 如果使用docker启动redis
+
+```yml
+services:
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis-container
+    ports:
+      - '6379:6379'
+```
+
+```sh
+# 启动
+docker-compose up -d
 ```
 
 ### 立即启动
 
 ```sh
-git clone --depth=1 https://github.com/lemonade-lab/ollama.git
-cd ollama
+git clone --depth=1 https://github.com/xiuxianjs/openai.git
+cd openai
 ```
 
 ```sh
 npm install yarn@1.19.1 -g --registry=https://registry.npmmirror.com
 yarn install
+```
+
+```sh
+yarn add @alemonjs/db
 ```
 
 ```sh
@@ -44,13 +95,20 @@ yarn dev
 > 请确保配置有packages空间，详情请阅读开发文档
 
 ```sh
-git clone --depth=1 https://github.com/lemonade-lab/ollama.git ./packages/ollama
+git clone --depth=1 https://github.com/xiuxianjs/openai.git ./packages/openai
 ```
 
 ```sh
 npx lerna run build
 ```
 
-## 交流
+### 扩展
 
-QQ Group 806943302
+```sh
+yarn add alemonjs-openai -W
+```
+
+```yaml
+apps:
+  - 'alemonjs-openai'
+```

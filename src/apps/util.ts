@@ -1,5 +1,4 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import { createEventName as createEventNames } from 'alemonjs'
 
 /**
  * 创建app名称
@@ -7,12 +6,7 @@ import { fileURLToPath } from 'url'
  * @param select
  * @returns
  */
-export const createEventName = (url: string, select = 'apps') => {
-  const __dirname = dirname(fileURLToPath(url))
-  const dirs = __dirname.split('/').reverse()
-  const name = dirs.slice(0, dirs.indexOf(select)).join(':')
-  return `ollama:${select}:${name}`
-}
+export const createEventName = (url: string) => createEventNames(url, 'apps')
 
 const cdCache = {}
 

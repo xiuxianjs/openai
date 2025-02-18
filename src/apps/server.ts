@@ -1,65 +1,29 @@
-import { AI } from '@src/apps/util'
-import axios, { AxiosRequestConfig } from 'axios'
-import { ModelList } from './typing'
 import { getConfigValue } from 'alemonjs'
-
-const name = 'ollama'
-
-const server = (config?: AxiosRequestConfig) => {
-  const value = getConfigValue()
-  if (!value) {
-    new Error('请配置环境变量')
-  } else {
-    if (!value[name]) {
-      new Error('请配置ollama')
-    }
-    if (!value[name].baseURL) {
-      new Error('请配置ollama.baseURL')
-    }
-  }
-  const api = axios.create({
-    baseURL: value[name].baseURL,
-    timeout: value[name].timeout ? value[name].timeout : 60000
-  })
-  return api(config)
-}
-
-export const tags = async (): Promise<ModelList> => {
-  return await server({
-    method: 'get',
-    url: '/api/tags',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(res => res.data)
-}
-
-import { getIoRedis } from 'alemonjs'
+import OpenAI from 'openai'
+import { getIoRedis } from '@alemonjs/db'
 
 const ioredis = getIoRedis()
 
-type Message = {
-  model: string
-  created_at: string
-  message: {
-    role: 'assistant'
-    content: string
+let openai: OpenAI | null = null
+
+// 获取openai实例
+const getOpenAI = (): OpenAI => {
+  if (!openai) {
+    const value = getConfigValue()
+    const openaiConfig = value?.openai
+    if (!openaiConfig) {
+      throw new Error('OpenAI not configured')
+    }
+    openai = new OpenAI({
+      baseURL: openaiConfig.baseURL,
+      apiKey: openaiConfig?.apiKey
+    })
   }
-  done_reason: 'stop'
-  done: true
-  total_duration: number
-  load_duration: number
-  prompt_eval_count: number
-  prompt_eval_duration: number
-  eval_count: number
-  eval_duration: number
+  return openai
 }
 
-export const chat = async (
-  key: string,
-  userMessage: string
-): Promise<Message> => {
-  // Initialize the messages in Redis if they do not exist
+export const chat = async (key: string, userMessage: string) => {
+  // 如果不存在的消息，请在redis中初始化消息
   const exists = await ioredis.exists(key)
   if (!exists) {
     await ioredis.rpush(
@@ -68,40 +32,39 @@ export const chat = async (
     )
   }
 
-  // Append the user message to the Redis list
+  // 将用户消息附加到REDIS列表中
   await ioredis.rpush(
     key,
     JSON.stringify({ role: 'user', content: userMessage })
   )
 
-  // Retrieve the entire message list
+  // 检索整个消息列表
   const messages = await ioredis.lrange(key, 0, -1)
+  // 将消息解析为JSON对象
   const parsedMessages = messages.map(msg => JSON.parse(msg))
 
-  const model = AI.get('model') || 'gemma2:latest'
+  // 获取openai实例
+  const openai = getOpenAI()
 
-  const response = await server({
-    method: 'post',
-    url: '/api/chat',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: {
-      model: model,
-      messages: parsedMessages,
-      stream: false
-    }
+  const value = getConfigValue()
+
+  // 通过openai的chat API获取对话
+  const completion = await openai.chat.completions.create({
+    messages: parsedMessages,
+    model: value?.openai?.model
   })
 
-  const res = response.data
+  console.log('completion', completion)
 
-  // Store the assistant's response in messages
-  const assistantMessage = res.message
+  // 将助手消息附加到REDIS列表中
+  const assistantMessage = completion.choices[0].message
+
   if (assistantMessage?.content) {
     await ioredis.rpush(key, JSON.stringify(assistantMessage))
   }
 
-  return res
+  // 返回助手消息
+  return assistantMessage
 }
 
 // 清理聊天记录的函数
