@@ -1,0 +1,12 @@
+# Node dependencies
+node_modules
+/lib/
+/dist
+*.log
+.env.*
+*.logs.ts
+yarn.lock
+/liquibase
+*.memory-card.json
+.DS_Store
+alemonjs-*.tgz

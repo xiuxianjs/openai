@@ -1,56 +1,27 @@
 {
-  "name": "alemonjs-openai",
-  "version": "0.0.2",
-  "description": "openai ai",
+  "name": "openai",
+  "version": "0.0.1",
+  "description": "openai",
   "author": "ningmengchongshui",
   "type": "module",
-  "main": "lib/index.js",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js"
-    },
-    "./package": "./package.json"
-  },
+  "private": true,
   "scripts": {
-    "dev": "lvy dev",
-    "view": "lvy dev --jsxp",
-    "build": "lvy build",
-    "start": "pm2 startOrRestart pm2.config.cjs",
-    "stop": "pm2 stop pm2.config.cjs",
-    "delete": "pm2 delete pm2.config.cjs",
+    "dev": "yarn --cwd packages/openai-frontend dev",
+    "dev-bot": "yarn --cwd packages/openai dev",
+    "build": "node build",
     "format": "prettier --write .",
     "check-format": "git diff --exit-code",
     "prepare": "husky"
   },
-  "dependencies": {
-    "openai": "^4.85.1"
-  },
   "devDependencies": {
+    "lerna": "^8.2.0",
     "@alemonjs/db": "^0.0.3",
     "@alemonjs/gui": "^0.3.5",
-    "@types/node": "^20.3.1",
     "alemonjs": "2.0.0-rc.88",
-    "cssnano": "^7.0.6",
-    "jsxp": "1.1.2",
-    "globals": "^15.12.0",
-    "husky": "^9.0.11",
-    "less": "^4.2.1",
-    "lvyjs": "^0.2.14",
-    "pm2": "^5.3.0",
     "prettier": "^3.3.3",
-    "sass": "^1.83.0",
-    "tailwindcss": "^3.4.16"
+    "husky": "^9.0.11"
   },
-  "keywords": [
-    "alemonjs"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "access": "public"
-  },
-  "bugs": "https://github.com/xiuxianjs/openai/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xiuxianjs/openai.git"
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }
