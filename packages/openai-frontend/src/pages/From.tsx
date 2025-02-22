@@ -9,6 +9,10 @@ export default function Form() {
 
   useEffect(() => {
     if (!window.createDesktopAPI) return
+    if (!window.API) {
+      const API = window.createDesktopAPI()
+      window.API = API
+    }
     // 获取消息
     window.API.postMessage({
       type: 'openai.init'

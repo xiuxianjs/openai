@@ -1,6 +1,6 @@
 {
   "name": "alemonjs-openai",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "OpenAI协议连接",
   "author": {
     "name": "ningmengchongshui",
@@ -14,7 +14,7 @@
       "import": "./lib/index.js"
     },
     "./package": "./package.json",
-    "./desktop": "./desktop.js"
+    "./desktop": "./lib/desktop.js"
   },
   "scripts": {
     "dev": "lvy dev",
