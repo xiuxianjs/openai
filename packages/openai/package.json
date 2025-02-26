@@ -1,6 +1,6 @@
 {
   "name": "alemonjs-openai",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "OpenAI协议连接",
   "author": {
     "name": "ningmengchongshui",
@@ -39,18 +39,18 @@
   },
   "alemonjs": {
     "desktop": {
-      "logo": "assets/logo.png",
+      "logo": "antd.OpenAIOutlined",
       "commond": [
         {
           "name": "openai",
-          "icon": "assets/logo.png",
+          "icon": "antd.OpenAIOutlined",
           "commond": "open.openai"
         }
       ],
       "sidebars": [
         {
           "name": "openai",
-          "icon": "assets/logo.png",
+          "icon": "antd.OpenAIOutlined",
           "commond": "open.openai"
         }
       ]

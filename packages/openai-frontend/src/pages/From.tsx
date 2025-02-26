@@ -51,39 +51,42 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="py-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <div>baseURL</div>
+        <div className="block text-sm font-medium ">baseURL</div>
         <Input
           id="baseURL"
           name="baseURL"
-          className="w-full px-2 py-1 rounded-md"
+          className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring "
           value={formData.baseURL}
           onChange={handleChange}
         ></Input>
       </div>{' '}
       <div>
-        <div>apiKey</div>
+        <div className="block text-sm font-medium ">apiKey</div>
         <Input
           id="apiKey"
           name="apiKey"
-          className="w-full px-2 py-1 rounded-md"
+          className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring "
           value={formData.apiKey}
           onChange={handleChange}
         ></Input>
       </div>
       <div>
-        <div>model</div>
+        <div className="block text-sm font-medium ">model</div>
         <Input
           id="model"
           name="model"
           value={formData.model}
-          className="w-full px-2 py-1 rounded-md"
+          className="mt-1 block w-full p-2 border rounded-md focus:outline-none focus:ring "
           placeholder="模型名称"
           onChange={handleChange}
         ></Input>
       </div>
-      <Button type="submit" className="px-2 py-1 w-full rounded-md">
+      <Button
+        type="submit"
+        className="w-full  p-2 rounded-md  transition duration-200"
+      >
         保存
       </Button>
     </form>
