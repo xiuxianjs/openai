@@ -1,7 +1,9 @@
-import { Text, useSend } from 'alemonjs'
+import { Text, useMessage } from 'alemonjs'
+import { selects } from '..'
 export const regular = /^(#|\/)?(help|menu|菜单|帮助)/i
-export default OnResponse((event, next) => {
-  const Send = useSend(event)
+
+const res = onResponse(selects, (event, next) => {
+  const [message] = useMessage(event)
   const messages = [
     '【openAI】助手',
     '/aiXXX 询问ai',
@@ -9,7 +11,9 @@ export default OnResponse((event, next) => {
     '/ai-set 设置 config.yaml',
     '例: /set model gpt-4o'
   ]
-  Send(Text(messages.join('\n')))
+  message.send(format(Text(messages.join('\n'))))
   next()
   return
-}, 'message.create')
+})
+
+export default res

@@ -6,6 +6,6 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "packages/openai/jsxp.config.tsx"],
+  "include": ["src/**/*", "jsxp.config.tsx"],
   "extends": "lvyjs/tsconfig.json"
 }

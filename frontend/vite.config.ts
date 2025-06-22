@@ -36,6 +36,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
+        dir: '../dist',
         entryFileNames: `assets/index.js`,
         assetFileNames: `assets/[name].[ext]`
       }

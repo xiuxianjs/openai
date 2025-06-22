@@ -1,5 +1,7 @@
 # openai
 
+> 待支持 alemonjs v2.1
+
 支持连接符合openai接口的模型
 
 - openai
