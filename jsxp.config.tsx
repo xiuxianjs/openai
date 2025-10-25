@@ -1,4 +1,4 @@
-import { defineConfig } from 'jsxp'
+import { defineConfig } from 'jsxp';
 export default defineConfig({
   routes: {}
-})
+});

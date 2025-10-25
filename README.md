@@ -1,6 +1,38 @@
 # openai
 
-> 待支持 alemonjs v2.1
+必要环境 `nodejs` 、`redis` 、`chrome`
+
+该扩展推荐使用`alemongo`作为生产环境
+
+https://github.com/lemonade-lab/alemongo
+
+## 安装
+
+### alemongo
+
+- 唤醒
+
+`/ai帮助`
+
+地址
+
+```sh
+https://github.com/xiuxianjs/openai.git
+```
+
+分支
+
+```sh
+release
+```
+
+### 本地模板
+
+```sh
+git clone --depth=1 -b release  https://github.com/xiuxianjs/openai.git ./packages/openai
+```
+
+## 连接模型
 
 支持连接符合openai接口的模型
 
@@ -36,52 +68,21 @@ apiKey: ''
 model: 'llama3.2'
 ```
 
-- 唤醒
+### Redis
 
-`/help`
+将以默认配置连接本地redis,
 
-## 环境
+如需调整，请阅读[@alemonjs/db](https://www.npmjs.com/package/@alemonjs/db)配置连接,
 
-`alemon.config.yaml`
-
-```yaml
-openai:
-  baseURL: ''
-  apiKey: ''
-  model: ''
-# 需安装redis进行对话存储
-redis:
-  host: '127.0.0.1'
-  port: '6379'
-  password: ''
-  db: '1'
-```
-
-- 如果使用docker启动redis
-
-```yml
-services:
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis-container
-    ports:
-      - '6379:6379'
-```
+如需使用docker请参考[docker-compose.yml](./docker-compose.yml)
 
 ```sh
 # 启动
 docker-compose up -d
 ```
 
-### 使用
-
-> 请确保已安装alemonjs机器人
-
 ```sh
-yarn add alemonjs-openai @alemonjs/db -W
+docker-compose down
 ```
 
-```yaml
-apps:
-  - 'alemonjs-openai'
-```
+> 机器人全部使用redis存储，请务必启动redis持久化存储

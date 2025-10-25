@@ -1,7 +1,11 @@
+import response from '@src/router';
 export default defineChildren({
+  register() {
+    return {
+      response
+    };
+  },
   onCreated() {
-    logger.info({
-      message: '启动 OpenAI 插件'
-    })
+    logger.info('Start OpenAI APP');
   }
-})
+});
