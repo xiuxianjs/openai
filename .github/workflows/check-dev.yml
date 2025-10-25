@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: 缓存前端依赖
-        uses: actions/cache@v3
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/yarn.lock') }}
+      # - name: 缓存前端依赖
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: frontend/node_modules
+      #     key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/yarn.lock') }}
 
       - name: 缓存游戏依赖
         uses: actions/cache@v3
@@ -39,9 +39,9 @@ jobs:
              npm install -g yarn
           fi
 
-      - name: 安装前端依赖
-        run: |
-          cd frontend && yarn install --ignore-engines --frozen-lockfile
+      # - name: 安装前端依赖
+      #   run: |
+      #     cd frontend && yarn install --ignore-engines --frozen-lockfile
 
       - name: 安装游戏依赖
         run: |
