@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   create-test-rb-branch:
-    runs-on: self-hosted
+    runs-on: macos-latest
 
     steps:
       - name: 检出代码库

@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   create-dev-branch:
-    runs-on: self-hosted
+    runs-on: macos-latest
 
     steps:
       - name: 检出代码库

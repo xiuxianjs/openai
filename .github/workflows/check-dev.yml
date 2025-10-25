@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-to-deploy:
-    runs-on: self-hosted
+    runs-on: macos-latest
 
     steps:
       - name: 检出代码库
