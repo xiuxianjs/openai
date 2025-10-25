@@ -82,7 +82,6 @@ docker-compose up -d
 ```
 
 ```sh
+# 关闭
 docker-compose down
 ```
-
-> 机器人全部使用redis存储，请务必启动redis持久化存储
