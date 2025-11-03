@@ -60,6 +60,7 @@ export default function Form() {
           type="text"
           id="baseURL"
           name="baseURL"
+          placeholder="http://localhost:11434/v1/"
           value={formData.baseURL}
           onChange={handleChange}
           className="mt-1 block w-full p-2 border  rounded-md focus:outline-none focus:ring "
@@ -77,7 +78,6 @@ export default function Form() {
           id="apiKey"
           name="apiKey"
           value={formData.apiKey}
-          placeholder="sad12345678,kfp12345678,sgs12345678"
           onChange={handleChange}
           className="mt-1 block w-full p-2 border  rounded-md focus:outline-none focus:ring "
         />
@@ -94,8 +94,8 @@ export default function Form() {
           id="model"
           name="model"
           value={formData.model}
-          placeholder="sad12345678,kfp12345678,sgs12345678"
           onChange={handleChange}
+          placeholder="llama3.2"
           className="mt-1 block w-full p-2 border  rounded-md focus:outline-none focus:ring "
         />
       </div>
