@@ -13,6 +13,7 @@ export default [
       'lib/**',
       'logs/**',
       'dist/**',
+      'dist-desktop/**',
       'node_modules/**',
       '**/*.css',
       '**/*.jpg',

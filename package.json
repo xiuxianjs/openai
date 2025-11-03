@@ -20,7 +20,7 @@
     "dev": "npx lvy dev",
     "view": "npx lvy dev --jsxp",
     "build": "npx lvy build",
-    "bundle": "yarn --cwd frontend-desktop build",
+    "bundle-desktop": "yarn --cwd frontend-desktop build",
     "eslint": "eslint src --fix",
     "format": "prettier --write .",
     "check-format": "git diff --exit-code",
