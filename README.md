@@ -2,22 +2,18 @@
 
 必要环境 `nodejs` 、`redis` 、`chrome`
 
-该扩展推荐使用`alemongo`作为生产环境
+该扩展推荐使用 [`alemongo`🔗](https://github.com/lemonade-lab/alemongo/releases) 作为生产环境。
 
-https://github.com/lemonade-lab/alemongo
+如果你是一名非技术人员，可使用 [`alemondesk`🔗](https://github.com/lemonade-lab/alemondesk/releases) 桌面版。
 
-## 安装
+### 安装
 
-### alemongo
-
-- 唤醒
-
-`/ai帮助`
+- 方式1: 拉取release分支
 
 地址
 
 ```sh
-https://github.com/xiuxianjs/openai.git
+https://github.com/xiuxianjs/xiuxian-plugin.git
 ```
 
 分支
@@ -26,10 +22,32 @@ https://github.com/xiuxianjs/openai.git
 release
 ```
 
-### 本地模板
+- 方式2: 从npm中安装
 
 ```sh
-git clone --depth=1 -b release  https://github.com/xiuxianjs/openai.git ./packages/openai
+yarn add alemonjs-open -W
+```
+
+## 使用
+
+使用 `/ai帮助` 唤醒
+
+### Redis
+
+将以默认配置连接本地redis,
+
+如需调整，请阅读[@alemonjs/db](https://www.npmjs.com/package/@alemonjs/db)配置连接,
+
+如需使用docker请参考[docker-compose.yml](./docker-compose.yml)
+
+```sh
+# 启动
+docker-compose up -d
+```
+
+```sh
+# 关闭
+docker-compose down
 ```
 
 ## 连接模型
@@ -66,22 +84,4 @@ https://ollama.com/
 baseURL: 'http://localhost:11434/v1/'
 apiKey: ''
 model: 'llama3.2'
-```
-
-### Redis
-
-将以默认配置连接本地redis,
-
-如需调整，请阅读[@alemonjs/db](https://www.npmjs.com/package/@alemonjs/db)配置连接,
-
-如需使用docker请参考[docker-compose.yml](./docker-compose.yml)
-
-```sh
-# 启动
-docker-compose up -d
-```
-
-```sh
-# 关闭
-docker-compose down
 ```

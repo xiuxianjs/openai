@@ -1,8 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import ts from 'typescript-eslint'
-import prettier from 'eslint-config-prettier'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import ts from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -30,7 +30,7 @@ export default [
   {
     files: ['**/*.d.ts'],
     rules: {
-      'spaced-comment': 'off'
+      'spaced-comment': 'off',
     }
   },
   // 基础 JavaScript 推荐规则
@@ -46,9 +46,9 @@ export default [
       parser: ts.parser,
       parserOptions: {
         project: './tsconfig.json',
-        tsconfigRootDir: import.meta.dirname
-      }
-    }
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
   },
   // React 相关规则配置
   {
@@ -169,7 +169,7 @@ export default [
       'implicit-arrow-linebreak': ['error', 'beside'],
       // 最大行长度限制 - 100字符，忽略URL和字符串
       'max-len': ['warn', { code: 160, ignoreUrls: true, ignoreStrings: true }],
-
+      
       // 禁用混合运算符检查 - 与自动格式化工具冲突
       'no-mixed-operators': 'off',
       // 禁止使用制表符，统一使用空格
@@ -183,11 +183,7 @@ export default [
         'error',
         { blankLine: 'always', prev: '*', next: 'return' },
         { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        {
-          blankLine: 'any',
-          prev: ['const', 'let', 'var'],
-          next: ['const', 'let', 'var']
-        }
+        { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
       ],
       // 对象属性引号规则 - 只在必要时使用引号
       'quote-props': ['error', 'as-needed'],
@@ -196,18 +192,14 @@ export default [
       // 一元运算符空格规则
       'space-unary-ops': 'error',
       // 注释空格规则 - 要求空格，但允许特殊标记
-      'spaced-comment': [
-        'error',
-        'always',
-        {
-          line: {
-            markers: ['/'],
-            exceptions: ['///']
-          }
-        }
-      ],
+      'spaced-comment': ['error', 'always', { 
+        line: { 
+          markers: ['/'], 
+          exceptions: ['///'] 
+        } 
+      }],
       // 模板标签间距规则
       'template-tag-spacing': 'error'
     }
   }
-]
+];
