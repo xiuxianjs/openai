@@ -1,6 +1,6 @@
 {
   "name": "alemonjs-openai",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "OpenAI协议连接",
   "author": {
     "name": "ningmengchongshui",
@@ -21,6 +21,7 @@
     "view": "npx lvy dev --jsxp",
     "build": "npx lvy build",
     "bundle-desktop": "yarn --cwd frontend-desktop build",
+    "push": "yarn build && yarn bundle-desktop && npm publish",
     "eslint": "eslint src --fix",
     "format": "prettier --write .",
     "check-format": "git diff --exit-code",
