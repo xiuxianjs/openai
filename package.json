@@ -28,14 +28,14 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@alemonjs/db": "^0.0.11",
+    "@alemonjs/db": "^0.0.13",
     "@alemonjs/discord": "^2.1.0-alpha.19",
     "@alemonjs/process": "^0.0.7",
     "@alemonjs/qq-bot": "^2.1.0-alpha.19",
     "@eslint/js": "^9.14.0",
     "@types/uuid": "^10.0.0",
     "@types/ws": "8.18.1",
-    "alemonjs": "^2.1.2",
+    "alemonjs": "^2.1.5",
     "cssnano": "^7.0.6",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
@@ -59,18 +59,18 @@
     "desktop": {
       "logo": "antd.OpenAIOutlined",
       "platform": [],
-      "commond": [
+      "command": [
         {
-          "name": "OEPNAI",
+          "name": "openai",
           "icon": "antd.OpenAIOutlined",
-          "commond": "open.openai"
+          "command": "open.openai"
         }
       ],
       "sidebars": [
         {
-          "name": "OEPNAI",
+          "name": "openai",
           "icon": "antd.OpenAIOutlined",
-          "commond": "open.openai"
+          "command": "open.openai"
         }
       ]
     }
